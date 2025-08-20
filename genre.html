@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GhanaRhythms - Music Genres</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Ghana-inspired Color Palette */
+        :root {
+            --ghana-red: #ce1126;
+            --ghana-gold: #fcd116;
+            --ghana-green: #006b3f;
+            --ghana-black: #000000;
+            --light-beige: #f5f0e1;
+            --rich-brown: #5d4037;
+            --earth-orange: #e67e22;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f9f3e9 0%, #e8dfca 100%);
+            color: #333;
+            line-height: 1.6;
+            background-attachment: fixed;
+            overflow-x: hidden;
+        }
+        
+        /* Header Styles */
+        header {
+            background: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.85)), 
+                        url('https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        .logo {
+            font-size: 2.8rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: var(--ghana-gold);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            letter-spacing: 1px;
+        }
+        
+        .tagline {
+            font-size: 1.3rem;
+            max-width: 800px;
+            margin: 0 auto 1.5rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        /* Navigation */
+        nav {
+            background-color: var(--ghana-green);
+            position: sticky;
+            top: 0;
+            height: 70px;
+            display: flex;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 5%;
+        }
+        
+        .dove {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.4rem;
+            color: white;
+        }
+        
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin: 0 1.2rem;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        nav ul li a:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--ghana-gold);
+            transition: width 0.3s;
+        }
+        
+        nav ul li a:hover:after,
+        nav ul li a.active:after {
+            width: 100%;
+        }
+        
+        nav ul li a:hover {
+            color: var(--ghana-gold);
+        }
+        
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(90deg, var(--ghana-green) 0%, var(--ghana-red) 100%);
+            color: white;
+            padding: 5rem 2rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .page-header:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,100 L0,100 Z" fill="rgba(255,255,255,0.1)"/></svg>');
+            background-size: 100% 100%;
+        }
+        
+        .page-header h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+        
+        .page-header p {
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin: 0 auto;
+            position: relative;
+            color: rgba(255, 255, 255, 0.95);
+        }
+        
+        /* Genre Grid */
+        .genres-container {
+            max-width: 1200px;
+            margin: 0 auto 4rem;
+            padding: 0 2rem;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--ghana-green);
+            display: inline-block;
+            padding: 0 2rem;
+            background: linear-gradient(90deg, transparent, var(--light-beige), transparent);
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--ghana-green), var(--ghana-red));
+            z-index: -1;
+        }
+        
+        .genre-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2.5rem;
+        }
+        
+        .genre-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            transform: translateY(0);
+        }
+        
+        .genre-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .genre-image {
+            height: 220px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .genre-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.7s ease;
+        }
+        
+        .genre-card:hover .genre-image img {
+            transform: scale(1.1);
+        }
+        
+        .genre-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+            padding: 1.5rem;
+        }
+        
+        .genre-name {
+            font-size: 1.8rem;
+            color: white;
+            margin-bottom: 0.5rem;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+        }
+        
+        .genre-region {
+            display: inline-block;
+            background: var(--ghana-gold);
+            color: var(--ghana-black);
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        
+        .genre-content {
+            padding: 1.8rem;
+        }
+        
+        .genre-description {
+            color: #555;
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+        
+        .genre-stats {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .stat {
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--ghana-red);
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            color: #777;
+        }
+        
+        .genre-link {
+            display: block;
+            text-align: center;
+            padding: 0.8rem;
+            background: var(--ghana-green);
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .genre-link:hover {
+            background: var(--ghana-red);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(206, 17, 38, 0.25);
+        }
+        
+        /* Featured Artists */
+        .featured-artists {
+            background: white;
+            border-radius: 12px;
+            padding: 2.5rem;
+            margin: 3rem auto;
+            max-width: 1200px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+        
+        .artists-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .artist-card {
+            text-align: center;
+        }
+        
+        .artist-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            overflow: hidden;
+            border: 3px solid var(--ghana-gold);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .artist-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .artist-name {
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+            color: var(--ghana-green);
+        }
+        
+        .artist-genre {
+            font-size: 0.9rem;
+            color: var(--ghana-red);
+            font-weight: 500;
+        }
+        
+        /* Footer */
+        footer {
+            background: linear-gradient(to right, var(--ghana-green), var(--ghana-black));
+            color: white;
+            padding: 4rem 2rem 2rem;
+            text-align: center;
+            margin-top: 5rem;
+            position: relative;
+        }
+        
+        footer:before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            left: 0;
+            width: 100%;
+            height: 50px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M0,0 Q50,10 100,0 L100,10 L0,10 Z" fill="%23006b3f"/></svg>');
+            background-size: 100% 100%;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            text-align: left;
+        }
+        
+        .footer-column h3 {
+            color: var(--ghana-gold);
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+        
+        .footer-column h3:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--ghana-gold);
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-column ul li a {
+            color: rgba(255, 255, 255, 0.85);
+            text-decoration: none;
+            transition: all 0.3s;
+            display: block;
+            padding: 0.3rem 0;
+        }
+        
+        .footer-column ul li a:hover {
+            color: var(--ghana-gold);
+            transform: translateX(5px);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .social-links a {
+            color: white;
+            background: rgba(255, 255, 255, 0.15);
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            font-size: 1.2rem;
+        }
+        
+        .social-links a:hover {
+            background: var(--ghana-gold);
+            color: var(--ghana-black);
+            transform: translateY(-5px);
+        }
+        
+        .copyright {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        /* Ghana Adinkra Patterns */
+        .adinkra-pattern {
+            position: absolute;
+            opacity: 0.03;
+            z-index: -1;
+        }
+        
+        .pattern-1 {
+            top: 15%;
+            left: 5%;
+            font-size: 300px;
+            transform: rotate(25deg);
+        }
+        
+        .pattern-2 {
+            bottom: 10%;
+            right: 5%;
+            font-size: 250px;
+            transform: rotate(-15deg);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 900px) {
+            .genre-grid {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            }
+            
+            nav ul {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .genre-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Adinkra Patterns -->
+    <div class="adinkra-pattern pattern-1">&#xE300;</div>
+    <div class="adinkra-pattern pattern-2">&#xE300;</div>
+    
+    <!-- Header Section -->
+    <header>
+        <div class="logo">GhanaRhythms</div>
+        <div class="tagline">Preserving the Musical Heritage of Ghana</div>
+    </header>
+    
+    <!-- Navigation -->
+    <nav>
+        <div class="dove">
+            <i class="fas fa-dove"></i>
+            <span>GhanaRhythms</span>
+        </div>
+        <ul>
+            <li><a href="sts work.html">Home</a></li>
+            <li><a href="songs.html">Songs</a></li>
+            <li><a href="#" class="active">Genres</a></li>
+            <li><a href="#">Artists</a></li>
+            <li><a href="#">Regions</a></li>
+            <li><a href="#">About</a></li>
+        </ul>
+    </nav>
+    
+    <!-- Page Header -->
+    <section class="page-header">
+        <h1>Ghanaian Music Genres</h1>
+        <p>Explore the rich tapestry of rhythms and melodies that define Ghana's musical heritage</p>
+    </section>
+    
+    <!-- Genres Section -->
+    <section class="genres-container">
+        <div class="section-title">
+            <h2>Traditional & Contemporary Styles</h2>
+        </div>
+        
+        <div class="genre-grid">
+            <!-- Highlife -->
+            <div class="genre-card">
+                <div class="genre-image">
+                    <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Highlife">
+                    <div class="genre-overlay">
+                        <h3 class="genre-name">Highlife</h3>
+                        <span class="genre-region">Nationwide</span>
+                    </div>
+                </div>
+                <div class="genre-content">
+                    <p class="genre-description">The quintessential Ghanaian genre that blends traditional rhythms with Western instruments. Originating in the early 20th century, Highlife became the soundtrack of Ghana's independence era.</p>
+                    
+                    <div class="genre-stats">
+                        <div class="stat">
+                            <div class="stat-value">1920s</div>
+                            <div class="stat-label">Origin Era</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">85+</div>
+                            <div class="stat-label">Artists</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">Jazz</div>
+                            <div class="stat-label">Influences</div>
+                        </div>
+                    </div>
+                    
+                    <a href="#" class="genre-link">Explore Highlife</a>
+                </div>
+            </div>
+            
+            <!-- Hiplife -->
+            <div class="genre-card">
+                <div class="genre-image">
+                    <img src="https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Hiplife">
+                    <div class="genre-overlay">
+                        <h3 class="genre-name">Hiplife</h3>
+                        <span class="genre-region">Urban Centers</span>
+                    </div>
+                </div>
+                <div class="genre-content">
+                    <p class="genre-description">A fusion genre combining Highlife with hip hop that emerged in the 1990s. Hiplife became the dominant urban sound of Ghana, with artists rapping in local languages over contemporary beats.</p>
+                    
+                    <div class="genre-stats">
+                        <div class="stat">
+                            <div class="stat-value">1990s</div>
+                            <div class="stat-label">Origin Era</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">120+</div>
+                            <div class="stat-label">Artists</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">Hip Hop</div>
+                            <div class="stat-label">Influences</div>
+                        </div>
+                    </div>
+                    
+                    <a href="#" class="genre-link">Explore Hiplife</a>
+                </div>
+            </div>
+            
+            <!-- Adowa -->
+            <div class="genre-card">
+                <div class="genre-image">
+                    <img src="https://images.unsplash.com/photo-1621684015274-8f6e61d4c475?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Adowa">
+                    <div class="genre-overlay">
+                        <h3 class="genre-name">Adowa</h3>
+                        <span class="genre-region">Ashanti Region</span>
+                    </div>
+                </div>
+                <div class="genre-content">
+                    <p class="genre-description">A royal dance of the Ashanti people, traditionally performed at funerals and festivals. Characterized by graceful hand movements and intricate drum patterns that convey deep emotions.</p>
+                    
+                    <div class="genre-stats">
+                        <div class="stat">
+                            <div class="stat-value">17th C.</div>
+                            <div class="stat-label">Origin Era</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">9</div>
+                            <div class="stat-label">Drum Types</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">Funerals</div>
+                            <div class="stat-label">Context</div>
+                        </div>
+                    </div>
+                    
+                    <a href="#" class="genre-link">Explore Adowa</a>
+                </div>
+            </div>
+            
+            <!-- Kpanlogo -->
+            <div class="genre-card">
+                <div class="genre-image">
+                    <img src="https://images.unsplash.com/photo-1501386761578-eac5c94b800a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Kpanlogo">
+                    <div class="genre-overlay">
+                        <h3 class="genre-name">Kpanlogo</h3>
+                        <span class="genre-region">Greater Accra</span>
+                    </div>
+                </div>
+                <div class="genre-content">
+                    <p class="genre-description">A vibrant dance-drumming tradition created by the Ga people in the 1960s. Kpanlogo became the sound of youth culture and social commentary, known for its energetic rhythms.</p>
+                    
+                    <div class="genre-stats">
+                        <div class="stat">
+                            <div class="stat-value">1960s</div>
+                            <div class="stat-label">Origin Era</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">3</div>
+                            <div class="stat-label">Main Drums</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">Youth</div>
+                            <div class="stat-label">Culture</div>
+                        </div>
+                    </div>
+                    
+                    <a href="#" class="genre-link">Explore Kpanlogo</a>
+                </div>
+            </div>
+            
+            <!-- Agbadza -->
+            <div class="genre-card">
+                <div class="genre-image">
+                    <img src="https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Agbadza">
+                    <div class="genre-overlay">
+                        <h3 class="genre-name">Agbadza</h3>
+                        <span class="genre-region">Volta Region</span>
+                    </div>
+                </div>
+                <div class="genre-content">
+                    <p class="genre-description">The traditional war dance of the Ewe people, now performed at social gatherings. Characterized by fast-paced drumming and vigorous dance movements that symbolize battle sequences.</p>
+                    
+                    <div class="genre-stats">
+                        <div class="stat">
+                            <div class="stat-value">18th C.</div>
+                            <div class="stat-label">Origin Era</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">5</div>
+                            <div class="stat-label">Drum Patterns</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">War Dance</div>
+                            <div class="stat-label">Origin</div>
+                        </div>
+                    </div>
+                    
+                    <a href="#" class="genre-link">Explore Agbadza</a>
+                </div>
+            </div>
+            
+            <!-- Borborbor -->
+            <div class="genre-card">
+                <div class="genre-image">
+                    <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Borborbor">
+                    <div class="genre-overlay">
+                        <h3 class="genre-name">Borborbor</h3>
+                        <span class="genre-region">Northern Volta</span>
+                    </div>
+                </div>
+                <div class="genre-content">
+                    <p class="genre-description">A popular recreational music and dance from the Ewe people, characterized by its syncopated rhythms and circular dance formations. Often performed at festivals and celebrations.</p>
+                    
+                    <div class="genre-stats">
+                        <div class="stat">
+                            <div class="stat-value">1940s</div>
+                            <div class="stat-label">Origin Era</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">7</div>
+                            <div class="stat-label">Instruments</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">Festivals</div>
+                            <div class="stat-label">Context</div>
+                        </div>
+                    </div>
+                    
+                    <a href="#" class="genre-link">Explore Borborbor</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Featured Artists -->
+    <section class="featured-artists">
+        <div class="section-title">
+            <h2>Legendary Ghanaian Artists</h2>
+        </div>
+        
+        <div class="artists-grid">
+            <div class="artist-card">
+                <div class="artist-avatar">
+                    <img src="https://images.unsplash.com/photo-1494232410401-ad00d5433cfa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="E.T. Mensah">
+                </div>
+                <h3 class="artist-name">E.T. Mensah</h3>
+                <div class="artist-genre">Highlife</div>
+            </div>
+            
+            <div class="artist-card">
+                <div class="artist-avatar">
+                    <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Reggie Rockstone">
+                </div>
+                <h3 class="artist-name">Reggie Rockstone</h3>
+                <div class="artist-genre">Hiplife</div>
+            </div>
+            
+            <div class="artist-card">
+                <div class="artist-avatar">
+                    <img src="https://images.unsplash.com/photo-1485178575877-1a13bf489dfe?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1101&q=80" alt="Amakye Dede">
+                </div>
+                <h3 class="artist-name">Amakye Dede</h3>
+                <div class="artist-genre">Highlife</div>
+            </div>
+            
+            <div class="artist-card">
+                <div class="artist-avatar">
+                    <img src="https://images.unsplash.com/photo-1549213783-8284d0336c4f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Sarkodie">
+                </div>
+                <h3 class="artist-name">Sarkodie</h3>
+                <div class="artist-genre">Hiplife</div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>GhanaRhythms</h3>
+                <p>Preserving Ghana's musical heritage for future generations through documentation, education, and performance.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Explore</h3>
+                <ul>
+                    <li><a href="#">Music Genres</a></li>
+                    <li><a href="#">Traditional Instruments</a></li>
+                    <li><a href="#">Cultural Regions</a></li>
+                    <li><a href="#">Historical Timeline</a></li>
+                    <li><a href="#">Festivals & Events</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Resources</h3>
+                <ul>
+                    <li><a href="#">Research Library</a></li>
+                    <li><a href="#">Educational Materials</a></li>
+                    <li><a href="#">Artist Directory</a></li>
+                    <li><a href="#">Music Transcription</a></li>
+                    <li><a href="#">Oral Histories</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Contact Us</h3>
+                <ul>
+                    <li><i class="fas fa-map-marker-alt"></i> Accra, Ghana</li>
+                    <li><i class="fas fa-envelope"></i> info@ghanarhythms.com</li>
+                    <li><i class="fas fa-phone"></i> +233 24 123 4567</li>
+                    <li><i class="fas fa-university"></i> P.O. Box GP 1234</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>&copy; 2023 GhanaRhythms. All rights reserved. Proudly Ghanaian <span class="ghana-flag"></span></p>
+        </div>
+    </footer>
+    
+    <script>
+        // Add animation to genre cards when they come into view
+        document.addEventListener('DOMContentLoaded', function() {
+            const genreCards = document.querySelectorAll('.genre-card');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = 1;
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            genreCards.forEach(card => {
+                card.style.opacity = 0;
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(card);
+            });
+            
+            // Add hover effect to artist cards
+            const artistCards = document.querySelectorAll('.artist-card');
+            artistCards.forEach(card => {
+                card.addEventListener('mouseenter', () => {
+                    card.querySelector('.artist-avatar').style.transform = 'scale(1.1)';
+                    card.querySelector('.artist-name').style.color = 'var(--ghana-red)';
+                });
+                
+                card.addEventListener('mouseleave', () => {
+                    card.querySelector('.artist-avatar').style.transform = 'scale(1)';
+                    card.querySelector('.artist-name').style.color = 'var(--ghana-green)';
+                });
+            });
+            
+            // Add smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
