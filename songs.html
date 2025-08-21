@@ -78,6 +78,11 @@
         nav ul li {
             margin: 0 1.5rem;
         }
+        nav ul li .active{
+           background-color: #fcd116;
+           color: #000000;
+        }
+        
         
         nav ul li a {
             color: white;
@@ -438,11 +443,11 @@
          <i class="fas fa-dove">GhanaRhythms</i>
      </div>
         <ul>
-            <li><a href="sts work.html">Home</a></li>
-            <li><a href="#" class="active">Songs</a></li>
-            <li><a href="genre.html">Genres</a></li>
-            <li><a href="#">Artists</a></li>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="songs.html" class="active">Songs</a></li>
+            <li><a href="genre.html">Genre</a></li>
             <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
         </ul>
     </nav>
     
@@ -530,7 +535,6 @@
         
         <div class="song-grid" id="songGrid">
             <!-- Song cards will be dynamically inserted here -->
-             <h1>hello</h1>
         </div>
         
         <div class="pagination">
@@ -554,7 +558,7 @@
                     region: "ashanti",
                     genre: "adowa",
                     language: "akan",
-                    image: "https://images.unsplash.com/photo-1621684015274-8f6e61d4c475?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
+                    image: "/images/IMG_1136.WEBP",
                     year: 2018,
                     plays: 1245,
                     audio: "./audio/dd"
@@ -567,10 +571,10 @@
                     region: "greater-accra",
                     genre: "kpanlogo",
                     language: "ga",
-                    image: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
+                     image: "/images/IMG_1138.JPG",
                     year: 2020,
                     plays: 980,
-                     audio: "./audio/gg"
+                     audio: "./audio/Kpanlogo"
                 },
                 {
                     id: 3,
@@ -579,9 +583,10 @@
                     region: "volta",
                     genre: "agbadza",
                     language: "ewe",
-                    image: "https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
+                    image:"/images/IMG_1139.JPG",
                     year: 2019,
-                    plays: 1560
+                    plays: 1560,
+                    audio: "./audio/Agbadza"
                 },
                 {
                     id: 4,
@@ -590,9 +595,10 @@
                     region: "northern",
                     genre: "bamaya",
                     language: "dagbani",
-                    image: "https://images.unsplash.com/photo-1507838153414-b4b713384a76?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
+                    image:"images/IMG_1140.JPG",
                     year: 2017,
-                    plays: 870
+                    plays: 870,
+                    audio: "./audio/Takai"
                 },
                 {
                     id: 5,
@@ -601,9 +607,10 @@
                     region: "volta",
                     genre: "borborbor",
                     language: "ewe",
-                    image: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
+                    image:"images/IMG-20250820-WA0081.jpg",
                     year: 2021,
-                    plays: 2100
+                    plays: 2100,
+                    audio: "./audio/Borborbor"
                 },
                 {
                     id: 6,
@@ -612,9 +619,10 @@
                     region: "western",
                     genre: "highlife",
                     language: "fante",
-                    image: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
+                    image: "images/IMG-20250820-WA0084.jpg",
                     year: 2022,
-                    plays: 1890
+                    plays: 1890,
+                    audio: "./audio/Highlife1"
                 },
                 {
                     id: 7,
@@ -623,9 +631,10 @@
                     region: "ashanti",
                     genre: "fontomfrom",
                     language: "twi",
-                    image: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
+                    image:"images/IMG-20250820-WA0082.jpg",
                     year: 2016,
-                    plays: 1340
+                    plays: 1340,
+                    audio: "./audio/Fontomfrom"
                 },
                 {
                     id: 8,
@@ -636,7 +645,8 @@
                     language: "twi",
                     image: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
                     year: 2019,
-                    plays: 1050
+                    plays: 1050,
+                    audio: "./audio/Adowa2"
                 },
                 {
                     id: 9,
@@ -647,7 +657,8 @@
                     language: "ga",
                     image: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
                     year: 2020,
-                    plays: 920
+                    plays: 920,
+                    audio: "./audio/Ga"
                 },
                 {
                     id: 10,
@@ -658,18 +669,20 @@
                     language: "dagbani",
                     image: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
                     year: 2018,
-                    plays: 780
+                    plays: 780,
+                    audio: "./audio/Dagomba"
                 },
                 {
                     id: 11,
-                    title: "Adowa Traditional",
+                    title: "Akan Traditional",
                     artist: "Kumasi Cultural Troupe",
                     region: "ashanti",
                     genre: "adowa",
                     language: "twi",
                     image: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
                     year: 2017,
-                    plays: 1560
+                    plays: 1560,
+                    audio: "./audio/Akan"
                 },
                 {
                     id: 12,
@@ -677,10 +690,11 @@
                     artist: "Accra Fusion Band",
                     region: "greater-accra",
                     genre: "highlife",
-                    language: "ga",
+                    language: "akan",
                     image: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
                     year: 2023,
-                    plays: 2100
+                    plays: 2100,
+                    audio: "./audio/Highlife"
                 }
             ];
             

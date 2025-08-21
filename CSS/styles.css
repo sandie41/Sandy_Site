@@ -83,6 +83,10 @@
             transition: all 0.3s ease;
              
         }
+        nav ul li .active{
+           background-color: #fcd116;
+           color: #000000;
+        }
         
         nav ul li a:hover {
             background-color: var(--accent-color);
