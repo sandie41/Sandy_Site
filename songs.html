@@ -446,8 +446,6 @@
             <li><a href="index.html">Home</a></li>
             <li><a href="songs.html" class="active">Songs</a></li>
             <li><a href="genre.html">Genre</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Contact</a></li>
         </ul>
     </nav>
     
@@ -464,7 +462,9 @@
         
         <div class="search-box">
             <input type="text" id="searchInput" placeholder="Search for songs, artists, or regions...">
-            <button id="searchButton"><i class="fas fa-search"></i> Search</button>
+           <a href="https://www.google.com" target="_blank" id="searchButton" style="text-decoration: none;">
+                <button type="button" onclick="searchSong()"><i class="fas fa-search"></i> Search</button>
+            </a>
         </div>
         
         <div class="filter-options">
@@ -535,6 +535,25 @@
         
         <div class="song-grid" id="songGrid">
             <!-- Song cards will be dynamically inserted here -->
+             songCard.innerHTML = `
+    <div class="song-image">
+        <img src="${song.image}" alt="${song.title}">
+        <span class="song-badge">${song.genre.charAt(0).toUpperCase() + song.genre.slice(1)}</span>
+    </div>
+    <div class="song-info">
+        <h3 class="song-title">${song.title}</h3>
+        <p class="song-artist">${song.artist}</p>
+        <div class="song-meta">
+            <span class="song-region">${formatRegionName(song.region)}</span>
+            <div class="play-btn">
+                <audio id="audio-${song.id}" controls>
+                    <source src="${song.audio}.mp3" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+            </div>
+        </div>
+    </div>
+`;
         </div>
         
         <div class="pagination">
@@ -561,7 +580,7 @@
                     image: "/images/IMG_1136.WEBP",
                     year: 2018,
                     plays: 1245,
-                    audio: "./audio/dd"
+                    audio: "./audio/adowa"
                     
                 },
                 {
@@ -747,6 +766,19 @@
                     
                     songGrid.appendChild(songCard);
                 });
+
+                // Add event listeners to all audio elements after rendering
+                let currentlyPlaying = null;
+                const audioElements = songGrid.querySelectorAll('audio');
+                audioElements.forEach(audio => {
+                    audio.addEventListener('play', function() {
+                        if (currentlyPlaying && currentlyPlaying !== this) {
+                            currentlyPlaying.pause();
+                            currentlyPlaying.currentTime = 0;
+                        }
+                        currentlyPlaying = this;
+                    });
+                });
             }
             
             // Format region names for display
@@ -799,12 +831,9 @@
                 if (e.key === 'Enter') performSearch();
             });
             
-            regionFilter.addEventListener('change', performSearch);
-            genreFilter.addEventListener('change', performSearch);
-            languageFilter.addEventListener('change', performSearch);
-            sortSelect.addEventListener('change', performSearch);
-        });
+
+        });// <-- This closes the DOMContentLoaded function
+
     </script>
 </body>
 </html>
-   

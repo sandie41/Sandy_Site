@@ -129,3 +129,12 @@ displaySongs(filteredSongs);
 
     console.log('Setup complete. Ready for searches!');
 });
+
+function searchSong() {
+  const query = document.getElementById('searchInput').value.trim();
+  if (query !== '') {
+    const url = `https://www.google.com/search?q=${encodeURIComponent(query)}+song`;
+    window.open(url, '_blank');
+  }
+}
+
