@@ -27,6 +27,12 @@
             <li><a href="genre.html">Genre</a></li>
         </ul>
     </nav>
+    <div class="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+    </div>
+<div class="overlay"></div>
     
     <!-- Search Section -->
     <section class="search-container">
@@ -306,5 +312,48 @@
             <p>&copy; 2023 GhanaRhythms. All rights reserved. Proudly Ghanaian <span class="ghana-flag"></span></p>
         </div>
     </footer>
+    <script>
+// Mobile menu functionality
+document.addEventListener('DOMContentLoaded', function() {
+    // Create mobile nav element
+    const originalNav = document.querySelector('nav ul');
+    if (!originalNav) return;
+    
+    const mobileNav = originalNav.cloneNode(true);
+    mobileNav.classList.add('mobile-nav');
+    document.body.appendChild(mobileNav);
+    
+    const hamburger = document.querySelector('.hamburger');
+    const overlay = document.querySelector('.overlay');
+    
+    // Toggle menu
+    hamburger.addEventListener('click', function() {
+        mobileNav.classList.toggle('active');
+        hamburger.classList.toggle('active');
+        overlay.classList.toggle('active');
+        
+        // Prevent body scrolling when menu is open
+        document.body.style.overflow = mobileNav.classList.contains('active') ? 'hidden' : '';
+    });
+    
+    // Close menu when clicking on overlay
+    overlay.addEventListener('click', function() {
+        mobileNav.classList.remove('active');
+        hamburger.classList.remove('active');
+        overlay.classList.remove('active');
+        document.body.style.overflow = '';
+    });
+    
+    // Close menu when clicking on a link
+    mobileNav.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', function() {
+            mobileNav.classList.remove('active');
+            hamburger.classList.remove('active');
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+    });
+});
+</script>
 </body>
 </html>
